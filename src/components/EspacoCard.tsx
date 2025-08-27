@@ -2,12 +2,10 @@ import type { EspacoCardProps } from '../types/EspacoTy';
 import { Users, Building } from 'lucide-react';
 
 
-export function EspacoCard({ spaceName, category, imageUrl, capacity, availableTimes }: EspacoCardProps) {
+export function EspacoCard({ spaceName, category, capacity, availableTimes }: EspacoCardProps) {
   return (
     <div className="bg-slate-800 rounded-lg p-4 flex flex-col gap-4">
       <div className="flex gap-4">
-
-        <img src={imageUrl} alt={spaceName} className="w-24 h-36 rounded-md object-cover" />
 
         <div className="flex flex-col">
           <h3 className="text-xl font-bold text-white">{spaceName}</h3>
