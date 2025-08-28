@@ -10,6 +10,7 @@ const mainSpaces = [
   { id: 'salao-paroquial', name: 'Salão Paroquial' },
 ];
 
+//mudar isso depois, está estático 
 const allSubSpaces = [
   { id: 1, mainSpaceId: 'centro-pastoral', spaceName: "Quadra Grande", category: "Eventos, Reuniões", capacity: 500, availableTimes: ["08:00", "10:00", "15:00"]},
   { id: 2, mainSpaceId: 'centro-pastoral', spaceName: "Quadra Pequena", category: "Eventos, Reuniões", capacity: 100, availableTimes: ["08:00", "10:00", "15:00"]},
@@ -36,16 +37,13 @@ function App() {
     (space) => space.mainSpaceId === selectedMainSpace
   );
   
-  // 4. Lógica para fechar o dropdown ao clicar fora dele
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     }
-    // Adiciona o listener quando o componente monta
     document.addEventListener("mousedown", handleClickOutside);
-    // Remove o listener quando o componente desmonta
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -56,9 +54,7 @@ function App() {
     <div className="bg-slate-900 min-h-screen text-white font-sans">
       <header className="flex items-center justify-between p-4 bg-slate-800/80 backdrop-blur-sm sticky top-0 z-10">
         
-        {/* 5. O novo seletor com dropdown */}
         <div className="relative" ref={dropdownRef}>
-          {/* Botão que abre/fecha o dropdown */}
           <button 
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="flex items-center gap-2 font-bold text-lg"
@@ -68,7 +64,6 @@ function App() {
             <ChevronDown size={20} className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
           
-          {/* O menu dropdown que aparece/desaparece */}
           {isDropdownOpen && (
             <div className="absolute mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1">
               {mainSpaces.map(space => (
@@ -78,7 +73,7 @@ function App() {
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedMainSpace(space.id);
-                    setIsDropdownOpen(false); // Fecha o dropdown ao selecionar
+                    setIsDropdownOpen(false);
                   }}
                   className="block px-4 py-2 text-sm text-slate-200 hover:bg-indigo-600 hover:text-white"
                 >
